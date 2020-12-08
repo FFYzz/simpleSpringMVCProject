@@ -3,9 +3,12 @@ package cn.ffyzz;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.support.RequestContext;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Enumeration;
 import java.util.Locale;
 
@@ -33,6 +36,22 @@ public class LocaleController {
     @ResponseBody
     @GetMapping(value = "/sessionLocale", produces = "text/html;charset=UTF-8")
     public String sessionLocale(HttpServletRequest request) {
+        return getLocaleFromRequest(request);
+    }
+
+    @GetMapping(value = "/cookieLocale", produces = "text/html;charset=UTF-8")
+    public String setCookieLocale(HttpServletRequest request, HttpServletResponse response, String locale) {
+        LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(request);
+        if (locale == null) {
+            locale = "en-US";
+        }
+        localeResolver.setLocale(request, response, Locale.forLanguageTag(locale));
+        return "redirect:showCookieLocale";
+    }
+
+    @ResponseBody
+    @GetMapping(value = "/showCookieLocale", produces = "text/html;charset=UTF-8")
+    public String cookieLocale(HttpServletRequest request) {
         return getLocaleFromRequest(request);
     }
 
