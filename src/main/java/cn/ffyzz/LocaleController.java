@@ -21,6 +21,18 @@ public class LocaleController {
     @ResponseBody
     @GetMapping(value = "/acceptHeaderLocale", produces = "text/html;charset=UTF-8")
     public String acceptHeaderLocale(HttpServletRequest request) {
+        return getLocaleFromRequest(request);
+    }
+
+    @ResponseBody
+    @GetMapping(value = "/fixedLocale", produces = "text/html;charset=UTF-8")
+    public String fixedLocale(HttpServletRequest request) {
+        return getLocaleFromRequest(request);
+    }
+
+
+
+    private String getLocaleFromRequest(HttpServletRequest request) {
         String clientLocale = "";
         Enumeration<Locale> enus = request.getLocales();
         while (enus.hasMoreElements()) {
