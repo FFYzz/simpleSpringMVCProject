@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc
+       https://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="cn.ffyzz"/>
+    <mvc:annotation-driven/>
+    <mvc:view-resolvers>
+        <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+            <property name="prefix" value="/views/jsp/"/>
+            <property name="suffix" value=".jsp"/>
+        </bean>
+    </mvc:view-resolvers>
+
+    <mvc:resources mapping="/img/" location="/img/**"/>
+
+    <bean class="org.springframework.ui.context.support.ResourceBundleThemeSource">
+        <property name="basenamePrefix" value="theme."/>
+    </bean>
+
+    <bean id="themeResolver" class="org.springframework.web.servlet.theme.FixedThemeResolver">
+        <property name="defaultThemeName" value="themeDef1"/>
+    </bean>
+
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <!--       value 不能加 classpath-->
+        <!--    Accept-Language    en-US,zh-CN;q=0.95,zh;q=0.9,en;q=0.8,zh-TW;q=0.7-->
+        <property name="basename" value="i18n.message"/>
+        <property name="useCodeAsDefaultMessage" value="false"/>
+        <property name="defaultEncoding" value="utf-8"/>
+    </bean>
+
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver">
+        <property name="defaultLocale" value="zh_CN"/>
+    </bean>
+</beans>
