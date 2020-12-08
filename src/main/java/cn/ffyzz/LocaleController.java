@@ -30,6 +30,11 @@ public class LocaleController {
         return getLocaleFromRequest(request);
     }
 
+    @ResponseBody
+    @GetMapping(value = "/sessionLocale", produces = "text/html;charset=UTF-8")
+    public String sessionLocale(HttpServletRequest request) {
+        return getLocaleFromRequest(request);
+    }
 
 
     private String getLocaleFromRequest(HttpServletRequest request) {

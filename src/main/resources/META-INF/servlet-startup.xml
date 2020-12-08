@@ -42,7 +42,19 @@
     <!--    </bean>-->
 
     <!--        在定义 localeResolver 的时候指定了 locale，即使修改的 header 或者其他地方的 locale 的优先级，也无效-->
-    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.FixedLocaleResolver">
+    <!--    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.FixedLocaleResolver">-->
+    <!--        <property name="defaultLocale" value="zh_CN"/>-->
+    <!--    </bean>-->
+
+    <mvc:interceptors>
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+            <property name="paramName" value="locale"/>
+        </bean>
+    </mvc:interceptors>
+
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
         <property name="defaultLocale" value="zh_CN"/>
+        <property name="localeAttributeName" value="locale"/>
     </bean>
+
 </beans>
