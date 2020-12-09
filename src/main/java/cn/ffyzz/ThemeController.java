@@ -17,4 +17,9 @@ public class ThemeController {
         return "theme";
     }
 
+    @GetMapping("/sessionTheme")
+    public String sessionTheme() {
+        return "theme";
+    }
+
 }
