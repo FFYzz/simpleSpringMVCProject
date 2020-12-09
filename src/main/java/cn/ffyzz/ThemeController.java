@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ThemeController {
 
-    @GetMapping("/theme")
-    public String theme() {
+    @GetMapping("/fixedTheme")
+    public String fixedTheme() {
         return "theme";
     }
 
